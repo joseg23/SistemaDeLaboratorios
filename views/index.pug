@@ -2,56 +2,47 @@ extends layout
  
 block content
  
-  nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
-    a.navbar-brand(href='#') Mi Proyecto
-    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarCollapse' aria-controls='navbarCollapse' aria-expanded='false' aria-label='Toggle navigation')
+  nav.navbar.justify-content-between.navbar-expand-md.navbar-dark.bg-dark
+    .logo
+      img.ml-2(src='/images/logo1.png',width="90px")
+      a.navbar-brand.ml-4(href='#') Sistema de reservas
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
-    #navbarCollapse.collapse.navbar-collapse
+    #navbarCollapse.collapse.navbar-collapse.flex-grow-0
       ul.navbar-nav.mr-auto
-        li.nav-item.active
-          a.nav-link(href='/')
-            | Home 
-            span.sr-only (current)
         li.nav-item
-          a.nav-link(href='nosotros') Nosotros
+          a.nav-link(href='iniciar') Iniciar Sesion
         li.nav-item
-          a.nav-link(href='servicios') Servicios
-        li.nav-item
-          a.nav-link(href='contacto') Contacto
-      form.form-inline.mt-2.mt-md-0
-        input.form-control.mr-sm-2(type='text' placeholder='Buscar' aria-label='Buscar')
-        button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Buscar
-  main.container(role='main')
-    .jumbotron
-      h1 Home
-      p.lead
-        | Estás en la página Home
-      a.btn.btn-lg.btn-primary(href='#' role='button') Botón &raquo;
-    .container
-    
-    .row
-      .col-md-4
-        h2 Contenido
-        p
-          | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
-      .col-md-4
-        h2 Contenido
-        p
-          | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
-      .col-md-4
-        h2 Contenido
-        p
-          | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-        p
-          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
-    hr
- 
-  footer
-  .container
-    div(align='center')
-      | Desarrollado por 
-      a(href='#' target='_blank') Nube Colectiva
+          a.nav-link(href='registrar') Registrarse
+
+
+  #wrapper.d-flex
+    //a.closebtn(href='javascript:void(0)', onclick='closeNav()') &times;
+    #sidebar-wrapper.bg-light.border-right
+      .sidebar-heading Ajustes de busqueda
+      .list-group.list-group-flush
+          .form-group.list-group-item
+            label(for='visualizacion') Visualizar por:
+            br
+            input(type='radio', name='radio1', value='Mes')
+            |  Mes
+            br
+            input(type='radio', name='radio1', value='Semana')
+            |  Semana
+            br
+            input(type='radio', name='radio1', value='Dia')
+            |  Dia
+          .form-group.list-group-item.bg-grey.search-container
+            label(for='search') Filtrar busqueda:
+            input(type='text', placeholder='Search..', name='search')
+            button(type='submit')
+              i.fa.fa-search
+    #page-content-wrapper
+      .container-fluid
+        h1.mt-4 Aqui va el calendario
+
+        button#menu-toggle.btn.btn-primary(onclick="something()") Toggle Menu
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+  script.
+

@@ -4,7 +4,7 @@ const knex = require('knex')({
         host: 'localhost',
         user: 'admin',
         password: 'Lestrebien',
-        database: 'ucasoft'
+        database: 'proyectoweb'
     }
 })
 
