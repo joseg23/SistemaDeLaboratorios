@@ -8,12 +8,12 @@ block content
       span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
-        li.nav-item.active
-          a.nav-link(href='/')
-            | Home 
-            span.sr-only (current)
         li.nav-item
-          a.nav-link(href='nosotros') Nosotros
+          a.nav-link(href='/') Home
+        li.nav-item.active
+          a.nav-link(href='nosotros')
+            | Nosotros 
+            span.sr-only (current)
         li.nav-item
           a.nav-link(href='servicios') Servicios
         li.nav-item
@@ -23,35 +23,40 @@ block content
         button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Buscar
   main.container(role='main')
     .jumbotron
-      h1 Home
+      h1 Nosotros
       p.lead
-        | Estás en la página Home
+        | Estás en la página Nosotros
       a.btn.btn-lg.btn-primary(href='#' role='button') Botón &raquo;
     .container
+ 
+    p.lead
+        | Compartimos tutoriales sobre:
     
     .row
       .col-md-4
-        h2 Contenido
+        h2 Frontend
         p
           | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
+          a(href='http://blog.nubecolectiva.com/category/frontend/' target='_blank')
+           img.img-fluid.mt-3(src='http://blog.nubecolectiva.com/wp-content/uploads/2018/11/img_destacada_blog_devs-11-300x169.png')
+ 
       .col-md-4
-        h2 Contenido
+        h2 Backend
         p
           | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
+          a(href='http://blog.nubecolectiva.com/category/backend/' target='_blank')
+           img.img-fluid.mt-2(src='http://blog.nubecolectiva.com/wp-content/uploads/2018/11/img_destacada_blog_devs-8-300x169.png')
+ 
       .col-md-4
-        h2 Contenido
+        h2 Android
         p
-          | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-        p
-          a.btn.btn-secondary(href='#' role='button') Ver más &raquo;
+          | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.
+          a(href='http://blog.nubecolectiva.com/category/android/' target='_blank')
+           img.img-fluid.mt-2(src='http://blog.nubecolectiva.com/wp-content/uploads/2018/11/img_destacada_blog_devs-9-300x169.png')
+ 
     hr
  
   footer
   .container
     div(align='center')
       | Desarrollado por 
-      a(href='http://www.nubecolectiva.com' target='_blank') Nube Colectiva
