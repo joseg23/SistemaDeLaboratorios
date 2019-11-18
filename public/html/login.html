@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="login.css">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="signIn">
+          <!-- para el class active: https://stackoverflow.com/questions/21598722/change-div-to-class-active-only-when-needed -->
+          <h2 class="active"> Sign In </h2>
+          <h2 class="inactive ">Sign Up </h2>
+      
+          <!-- https://mdbootstrap.com/snippets/jquery/ascensus/130868 -->
+          <div class="fadeIn first">
+            <img src="https://assets.pcmag.com/media/images/553245-get-twitch-on-your-tv.png?width=1063&height=358"
+             id="icon" alt="User Icon" />
+
+          </div>
+      
+          <!-- Login papuh, aca siempre se usa lo de arriba, del fade in  -->
+          <form>
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+          </form>
+
+        </div>
+      </div>
+</body>
+</html>
