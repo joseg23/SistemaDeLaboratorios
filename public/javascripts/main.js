@@ -9,6 +9,5 @@ window.onload = function() {
         bars.classList.toggle('hide-sidebar');
         close.classList.toggle('hide-sidebar');
     })
-
 };
 

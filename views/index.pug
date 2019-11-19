@@ -5,17 +5,52 @@ block content
   nav.navbar.justify-content-between.navbar-expand-md.navbar-dark.bg-dark
     .logo
       img.ml-2(src='/images/logo1.png',width="90px")
-      a.navbar-brand.ml-4(href='#') Sistema de reservas
+      a.navbar-brand.ml-4(href='/') Sistema de reservas
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse.flex-grow-0
       ul.navbar-nav.mr-auto
         li.nav-item
-          a.nav-link(href='iniciar') Iniciar Sesion
+          a.nav-link(data-toggle='modal',href='javascript:void(0)', onclick='openLoginModal();') Iniciar Sesion
         li.nav-item
-          a.nav-link(href='registrar') Registrarse
+          a.nav-link(data-toggle='modal', href='javascript:void(0)', onclick='openRegisterModal();') Registrarse
 
-
+    #loginModal.modal.fade.login
+      .modal-dialog.login.animated
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+            h4.modal-title Iniciar Sesion
+          .modal-body
+            .box
+              .content
+                .division
+                  .line.l
+                  span
+                  .line.r
+                .error
+                .form.loginBox
+                  form(method='', action='', accept-charset='UTF-8')
+                    input#email.form-control(type='text', placeholder='Email', name='email')
+                    input#password.form-control(type='password', placeholder='Password', name='password')
+                    input.btn.btn-default.btn-login(type='button', value='Login', onclick='loginAjax()')
+            .box
+              .content.registerBox(style='display:none;')
+                .form
+                  form(method='', html='{:multipart=>true}', data-remote='true', action='', accept-charset='UTF-8')
+                    input#email.form-control(type='text', placeholder='Email', name='email')
+                    input#password.form-control(type='password', placeholder='Password', name='password')
+                    input#password_confirmation.form-control(type='password', placeholder='Repeat Password', name='password_confirmation')
+                    input.btn.btn-default.btn-register(type='button', value='Create account', name='commit')
+          .modal-footer
+            .forgot.login-footer
+              span
+                | &iquest;Buscando
+                a(href='javascript: showRegisterForm();') crear una cuenta
+                |                             ?
+            .forgot.register-footer(style='display:none')
+              span Crear Cuenta
+              a(href='javascript: showLoginForm();') Login
   #wrapper.d-flex
     #sidebar-wrapper.bg-light.border-right
       .sidebar-heading Ajustes de busqueda
