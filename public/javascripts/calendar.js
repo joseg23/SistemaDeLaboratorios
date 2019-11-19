@@ -3,7 +3,7 @@ $(document).ready(function() {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,basicWeek,basicDay'
+        right:''
       },
       defaultDate: '2018-03-12',
       navLinks: true, // can click day/week names to navigate views
@@ -75,11 +75,4 @@ $(document).ready(function() {
           });
       }
     });
-    $(".fc-right .fc-button-group").append(
-          '<div class="input-group datetimepicker"><input type="text" class="form-control fc-datepicker" placeholder="YYYY-MM-DD" style="padding: 0;width: 0;border: none;margin: 0;"></div>');
-        $(".fc-datepicker").datepicker({
-          dateFormat: 'yy-mm-dd',
-          showOn: "button",
-          buttonText: '<span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>'
-        });
   });

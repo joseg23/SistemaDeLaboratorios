@@ -19,16 +19,12 @@ block content
       .modal-dialog.login.animated
         .modal-content
           .modal-header
-            button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
             h4.modal-title Iniciar Sesion
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
           .modal-body
             .box
               .content
                 .division
-                  .line.l
-                  span
-                  .line.r
-                .error
                 .form.loginBox
                   form(method='', action='', accept-charset='UTF-8')
                     input#email.form-control(type='text', placeholder='Email', name='email')
@@ -45,11 +41,11 @@ block content
           .modal-footer
             .forgot.login-footer
               span
-                | &iquest;Buscando
+                | &iquest;Buscando 
                 a(href='javascript: showRegisterForm();') crear una cuenta
                 |                             ?
             .forgot.register-footer(style='display:none')
-              span Crear Cuenta
+              span Ya tienes una cuenta? 
               a(href='javascript: showLoginForm();') Login
   #wrapper.d-flex
     #sidebar-wrapper.bg-light.border-right

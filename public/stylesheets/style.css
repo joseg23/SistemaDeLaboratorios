@@ -3,6 +3,15 @@ body {
   padding: 0;
 }
 
+h4{
+  font-size: 18px;
+}
+
+.modal-header .close{
+  margin: 0;
+  padding: 0;
+}
+
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
