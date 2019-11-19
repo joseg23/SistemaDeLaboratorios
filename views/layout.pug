@@ -4,16 +4,24 @@ html
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
     meta(charset='utf-8')
     title= title
+    
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-    
+
+    link(href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css', rel='stylesheet')
+    link(href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css', rel='stylesheet', media='print')
 
   body
     block content
 
+    script(src='/js/jquery.js')
     link(rel='stylesheet', href='/js/jquery.min.js')
-    link(rel='stylesheet', href='/js/popper.js')
-    link(rel='stylesheet', href='/js/bootstrap.min.js')
-    script(src='/javascripts/sidebar.js')
-    
+    script(src='https://kit.fontawesome.com/19f5cdd5cb.js' crossorigin='anonymous')
+    script(src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js')
+    script(src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js')
+    script(src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src='https://unpkg.com/sweetalert/dist/sweetalert.min.js')    
+
+    script(src='/javascripts/main.js')
+    script(src='/javascripts/calendar.js')
