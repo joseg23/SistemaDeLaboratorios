@@ -3,8 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const jquery = require('jquery');
-const moment = require('moment');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -31,6 +30,14 @@ app.use('/moment', express.static(__dirname + 'node_modules/moment'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+const db = require("./data/db.js"); // importing the db config
+
+app.get("/todo", async (req, res) => {
+  const todos = await db("todo"); // making a query to get all todos
+  res.json({ todos });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
