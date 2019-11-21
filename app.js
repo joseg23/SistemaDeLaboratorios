@@ -10,6 +10,9 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+//delete in the future
+var exampleRouter = require('./data/reserva');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -30,6 +33,9 @@ app.use('/moment', express.static(__dirname + 'node_modules/moment'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//delete in the future
+app.use('/example',exampleRouter);
 
 const db = require("./data/db.js"); // importing the db config
 

@@ -1,22 +1,52 @@
 $(document).ready(function() {
+    var valor = document.getElementsByName('radio1');
+    var element = document.getElementById('visualizacion');
+    var element2 = document.getElementById('algo');
+
+    
+
+    element.addEventListener('click',  function (){
+        for(i=0;i<valor.length;i++)
+            if(valor[i].checked) var el= valor[i].value;
+            $('#calendar').fullCalendar('changeView', el);
+
+    });
+    
+    element2.addEventListener('keyup',function(){
+      var date2 = $("#datepicker").datepicker().val();
+      $('#calendar').fullCalendar('gotoDate', date2);
+    
+    })
+
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
         center: 'title',
-        right:'month,agendaWeek,agendaDay'
+        right:''
       },
+
       selectable: true,
       selectHelper: true,
-      navLinks: true, // can click day/week names to navigate views
+      navLinks: true,
       editable: true,
-      eventLimit: true, // allow "more" link when too many events
+      allDaySlot:false,
+      
+      defaultView:'agendaWeek',
+      minTime: '07:00:00',
+      maxTime: '21:00:00',
+      
+      dayClick: function(date, jsEvent, view) {
+
+        $('#txtFecha').val(date.format());
+        $('#ModalEventos').modal();
+      },
+
+      events:'',
       
       eventClick: function(calEvent, jsEvent, view, resourceObj) {
-          swal({
-            title: calEvent.title,
-            text: "Start From : "+moment(calEvent.start).format("MMMM Do YYYY, h:mm a"),
-            icon: "success",
-          });
+          $('#tituloEvento').html(calEvent.title);
+          $('#descripcionEvento').html(calEvent.descripcion);
+          $('#exampleModal').modal();
       }
     });
   });

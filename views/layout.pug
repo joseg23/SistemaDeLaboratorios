@@ -10,8 +10,10 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='/stylesheets/login-register.css', rel='stylesheet')
 
-    link(href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css', rel='stylesheet')
-    link(href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css', rel='stylesheet', media='print')
+    link(rel='stylesheet', href='/stylesheets/fullcalendar.min.css')
+    link(rel='stylesheet', media='print', href='/stylesheets/fullcalendar.print.min.css')
+
+    link(href='https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css', rel='stylesheet', type='text/css')
 
   body
     block content
@@ -20,10 +22,15 @@ html
     link(rel='stylesheet', href='/js/jquery.min.js')
     script(src='/js/bootstrap.min.js')
     script(src='https://kit.fontawesome.com/19f5cdd5cb.js' crossorigin='anonymous')
-    script(src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js')
-    script(src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js')
-    script(src='https://unpkg.com/sweetalert/dist/sweetalert.min.js')    
+    script(src='/javascripts/moment.min.js')
+    script(src='/javascripts/fullcalendar.min.js')
+    script(src='https://unpkg.com/sweetalert/dist/sweetalert.min.js')
+    script(src='/javascripts/es.js')
 
     script(src='/javascripts/main.js')
     script(src='/javascripts/calendar.js')
     script(src='/javascripts/login-register.js', type='text/javascript')
+
+
+    script(src='https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js', type='text/javascript')
+    

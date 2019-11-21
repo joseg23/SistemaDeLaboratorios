@@ -5,7 +5,7 @@ block content
   nav.navbar.justify-content-between.navbar-expand-md.navbar-dark.bg-dark
     .logo
       img.ml-2(src='/images/logo1.png',width="90px")
-      a.navbar-brand.ml-4(href='/') Sistema de reservas
+      a.navbar-brand.ml-4(href='/') Sistema de reservas de laboratorios
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse.flex-grow-0
@@ -51,17 +51,20 @@ block content
     #sidebar-wrapper.bg-light.border-right
       .sidebar-heading Ajustes de busqueda
       .list-group.list-group-flush
-          .form-group.list-group-item
+          #visualizacion.form-group.list-group-item
             label(for='visualizacion') Visualizar por:
             br
-            input(type='radio', name='radio1', value='Mes')
+            input(type='radio', name='radio1', value='month')
             |  Mes
             br
-            input(type='radio', name='radio1', value='Semana' checked)
+            input(type='radio', name='radio1', value='agendaWeek' checked)
             |  Semana
             br
-            input(type='radio', name='radio1', value='Dia')
+            input(type='radio', name='radio1', value='agendaDay')
             |  Dia
+          #algo.form-group.list-group-item.bg-grey
+            label(for='date') Seleccionar fecha:
+            input#datepicker
           .form-group.list-group-item.bg-grey.search-container
             label(for='search') Filtrar busqueda:
             input(type='text', placeholder='Search..', name='search')
@@ -75,4 +78,44 @@ block content
               i.hide-sidebar.fas.fa-bars.fa-1x
               i.fas.fa-times
         #calendar
-          
+  #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#tituloEvento.modal-title
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          #descripcionEvento
+        .modal-footer
+          button.btn.btn-success(type='button') Agregar
+          button.btn.btn-primary(type='button') Modificar
+          button.btn.btn-danger(type='button') Borrar
+          button.btn.btn-default(type='button', data-dismiss='modal') Cancelar
+
+  #ModalEventos.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#tituloEvento.modal-title
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          #descripcionEvento
+          label(for='txtFecha') Fecha:
+          input(type='text',id='txtFecha', name='txtFecha')
+          br
+          label(for='txtMateria') Materia:
+          input(type='text',id='txtMateria', name='txtMateria')
+          br
+          label(for='txtHora') Hora:
+          input(type='text',id='txtHora', name='txtHora')
+          br
+          label(for='txtDescripcion') Descripcion:
+          input(type='text',id='txtDescripcion', name='txtDescripcion')
+          br
+        .modal-footer
+          button.btn.btn-success(type='button') Agregar
+          button.btn.btn-primary(type='button') Modificar
+          button.btn.btn-danger(type='button') Borrar
+          button.btn.btn-default(type='button', data-dismiss='modal') Cancelar          
