@@ -78,20 +78,6 @@ block content
               i.hide-sidebar.fas.fa-bars.fa-1x
               i.fas.fa-times
         #calendar
-  #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-    .modal-dialog(role='document')
-      .modal-content
-        .modal-header
-          h5#tituloEvento.modal-title
-          button.close(type='button', data-dismiss='modal', aria-label='Close')
-            span(aria-hidden='true') &times;
-        .modal-body
-          #descripcionEvento
-        .modal-footer
-          button.btn.btn-success(type='button') Agregar
-          button.btn.btn-primary(type='button') Modificar
-          button.btn.btn-danger(type='button') Borrar
-          button.btn.btn-default(type='button', data-dismiss='modal') Cancelar
 
   #ModalEventos.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog(role='document')
@@ -101,21 +87,28 @@ block content
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') &times;
         .modal-body
-          #descripcionEvento
+          label(for='txtId') Id:
+          input(type='text',id='txtId', name='txtId')
+          br
           label(for='txtFecha') Fecha:
           input(type='text',id='txtFecha', name='txtFecha')
           br
           label(for='txtMateria') Materia:
-          input(type='text',id='txtMateria', name='txtMateria')
+          select(id='txtMateria',name='combo')
+            option(value='1', selected='') Programacion Web
+            option(value='2') Base de datos
+            option(value='3') Administracion de bases de datos
           br
           label(for='txtHora') Hora:
           input(type='text',id='txtHora', name='txtHora')
           br
-          label(for='txtDescripcion') Descripcion:
-          input(type='text',id='txtDescripcion', name='txtDescripcion')
-          br
+          label(for='txtLaboratorio') Laboratorio:
+          select(id='txtLaboratorio',name='combo')
+            option(value='1', selected='') Laboratorio 1
+            option(value='2') Laboratorio 2
+            option(value='3') Laboratorio 3
         .modal-footer
-          button.btn.btn-success(type='button') Agregar
+          button#btnAgregar.btn.btn-success(type='button') Agregar
           button.btn.btn-primary(type='button') Modificar
           button.btn.btn-danger(type='button') Borrar
           button.btn.btn-default(type='button', data-dismiss='modal') Cancelar          

@@ -12,6 +12,6 @@ window.onload = function() {
         document.getElementById('wrapper').classList.toggle('toggled');
         bars.classList.toggle('hide-sidebar');
         close.classList.toggle('hide-sidebar');
-    })
+    });
 };
 

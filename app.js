@@ -7,11 +7,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var reservasRouter = require('./routes/reservas');
+
 
 var app = express();
 
-//delete in the future
-var exampleRouter = require('./data/reserva');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,17 +33,7 @@ app.use('/moment', express.static(__dirname + 'node_modules/moment'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-//delete in the future
-app.use('/example',exampleRouter);
-
-const db = require("./data/db.js"); // importing the db config
-
-app.get("/todo", async (req, res) => {
-  const todos = await db("todo"); // making a query to get all todos
-  res.json({ todos });
-});
-
+app.use('/reserva',reservasRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
