@@ -12,42 +12,39 @@ $(document).ready(function() {
 
     });
     
-    element2.addEventListener('keyup',function(){
+    element2.addEventListener('click',function(){
       var date2 = $("#datepicker").datepicker().val();
       $('#calendar').fullCalendar('gotoDate', date2);
-    
     });
-    
+
     var NuevoEvento;
 
     $('#btnAgregar').click(function(){
         RecolectarDatosGUI();
-        EnviarInformacion('agregar',NuevoEvento);
-        //$('#ModalEventos').modal('toggle');//quitar despues
+        EnviarInformacion(NuevoEvento);
     });
 
     function RecolectarDatosGUI(){
         NuevoEvento = {
-            id:$('#txtId').val(),
             title:$('#txtMateria option:selected').text() +"-"+ $('#txtLaboratorio option:selected').text(),
             materia:$('#txtMateria').val(),
             start:$('#txtFecha').val() + " " + $('#txtHora').val(),
             laboratorio: $('#txtLaboratorio').val(),
-            color:'#a30203',
-            textColor:'#ffffff',
-            end:$('#txtFecha').val() + " " + $('#txtHora').val(),
+            status: false,
+            fin:$('#txtFin').val()
         };
     };
 
-    function EnviarInformacion (accion, objEvento){
+    function EnviarInformacion(objEvento){
       $.ajax({
         type: 'POST',
-        url: '' + accion,
+        url: '/reserva',
         data:objEvento,
         success : function(msg){
           if(msg){
-            $('calendario').fullCalendar('refetchEvents');
             $('#ModalEventos').modal('toggle');
+            $('#calendar').fullCalendar('refetchEvents');
+            
           }
         },
         error : function(){
@@ -67,7 +64,7 @@ $(document).ready(function() {
       selectHelper: true,
       navLinks: true,
       editable: true,
-      allDaySlot:true,
+      allDaySlot:false,
       
       defaultView:'agendaWeek',
       minTime: '07:00:00',
@@ -80,7 +77,7 @@ $(document).ready(function() {
         $('#ModalEventos').modal();
       },
 
-      events:'http://localhost:3000/reserva',
+      events:'/reserva',
       
       eventClick: function(calEvent, jsEvent, view, resourceObj) {
         $('#tituloEvento').html(calEvent.title);
@@ -90,7 +87,7 @@ $(document).ready(function() {
         $('#txtMateria').val(calEvent.materia);
         $('#txtLaboratorio').val(calEvent.laboratorio);
 
-        FechaHora = calEvent.start._i.split(" ");
+        FechaHora = calEvent.start._i.split("T");
         $('#txtFecha').val(FechaHora[0]);
         $('#txtHora').val(FechaHora[1]);
 

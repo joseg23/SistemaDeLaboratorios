@@ -5,6 +5,6 @@ block content
     .container
       .row.justify-content-center
         .col-md-12.text-center
-          span.display-1.d-block 404
+          span.display-1.d-block= error.status
           .mb-4.lead The page you are looking for was not found.
-          a.btn.btn-link(href='http://localhost:3000') Back to Home
+          a.btn.btn-link(href='/') Back to Home

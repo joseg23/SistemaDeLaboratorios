@@ -4,27 +4,28 @@ module.exports = {
   development: {
     client: 'pg',
     connection: process.env.DB_URL,
-    migrations: {
-      directory: './data/migrations',
-    },
-    seeds: { directory: './data/seeds' },
+    pool: {
+      afterCreate: function (conn, done) {
+        conn.query('SET timezone="UTC";', function (err) {
+          if (err) {
+            done(err, conn);
+          } else {
+            conn.query('SELECT set_limit(0.01);', function (err) {
+              done(err, conn);
+            });
+          }
+        });
+      }
+    }
   },
 
   testing: {
     client: 'pg',
     connection: process.env.DB_URL,
-    migrations: {
-      directory: './data/migrations',
-    },
-    seeds: { directory: './data/seeds' },
   },
 
   production: {
     client: 'pg',
     connection: process.env.DB_URL,
-    migrations: {
-      directory: './data/migrations',
-    },
-    seeds: { directory: './data/seeds' },
-  },
+  }
 };

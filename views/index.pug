@@ -98,8 +98,11 @@ block content
             option(value='1', selected='') Programacion Web
             option(value='2') Base de datos
             option(value='3') Administracion de bases de datos
+            option(value='4') Programacion orientada a objetos
+            option(value='5') Fundamentos de programacion
+            option(value='6') Programación de Dispositivos Móviles
           br
-          label(for='txtHora') Hora:
+          label(for='txtHora') Hora Inicial:
           input(type='text',id='txtHora', name='txtHora')
           br
           label(for='txtLaboratorio') Laboratorio:
@@ -107,8 +110,15 @@ block content
             option(value='1', selected='') Laboratorio 1
             option(value='2') Laboratorio 2
             option(value='3') Laboratorio 3
+            option(value='4') Laboratorio 4
+            option(value='5') Laboratorio 5
+            option(value='6') Laboratorio 6
+            option(value='7') Laboratorio 7
+          br
+          label(for='txtFin') Hora Final:
+          input(type='text',id='txtFin', name='txtFin')
         .modal-footer
           button#btnAgregar.btn.btn-success(type='button') Agregar
           button.btn.btn-primary(type='button') Modificar
           button.btn.btn-danger(type='button') Borrar
-          button.btn.btn-default(type='button', data-dismiss='modal') Cancelar          
+          button.btn.btn-default(type='button', data-dismiss='modal') Cancelar 
