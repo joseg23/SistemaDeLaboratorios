@@ -3,6 +3,9 @@ window.onload = function() {
     var tags = document.getElementsByTagName('i');
     var bars= tags[1];
     var close= tags[2];
+    var valor = document.getElementsByName('radio1');
+    var element1 = document.getElementById('visualizacion');
+    var element2 = document.getElementById('algo');
 
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4'
@@ -13,5 +16,16 @@ window.onload = function() {
         bars.classList.toggle('hide-sidebar');
         close.classList.toggle('hide-sidebar');
     });
-};
 
+    element1.addEventListener('click',  function (){
+        for(i=0;i<valor.length;i++)
+            if(valor[i].checked) var el= valor[i].value;
+            $('#calendar').fullCalendar('changeView', el);
+
+    });
+
+    element2.addEventListener('click',function(){
+        var date2 = $("#datepicker").datepicker().val();
+        $('#calendar').fullCalendar('gotoDate', date2);
+      });  
+};

@@ -2,22 +2,16 @@ var express = require('express');
 var router = express.Router();
 var reserva = require('../data/controllers/reservaController');
 
-function isValidId(req,res,next){
-    if(!isNaN(req.params.laboratorio)) return next();
-    next(new Error('Invalid ID'));
-};
-
-
 router.get('/',(req,res)=>{
     reserva.getAll().then(reservas =>{
         res.json(reservas);
     })
 });
 
-router.get('/:laboratorio',isValidId,(req,res,next)=>{
-    reserva.getOne(req.params.laboratorio).then(reserva=>{
-        if(reserva){
-            res.json(reserva);
+router.get('/:id',(req,res,next)=>{
+    reserva.getOne(req.params.id).then(reservas=>{
+        if(reservas){
+            res.json(reservas);
         }else{
             res.status(404);
             next();
@@ -31,14 +25,14 @@ router.post('/',(req,res)=>{
     });
 });
 
-router.put('/:laboratorio', isValidId,(req,res)=>{
-    reserva.update(req.params.laboratorio, req.body).then(reservas =>{
-        res.json(stickers[0]);
+router.put('/:id',(req,res)=>{
+    reserva.update(req.params.id, req.body).then(reservas=>{
+        res.json(reservas);
     });
 });
 
-router.delete('/:laboratorio', isValidId,(req,res)=>{
-    reserva.delete(req.params.laboratorio).then(()=>{
+router.delete('/:id',(req,res)=>{
+    reserva.delete(req.params.id).then(()=>{
         res.json({
             delete: true
         });

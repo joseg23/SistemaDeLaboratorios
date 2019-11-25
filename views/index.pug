@@ -29,7 +29,7 @@ block content
                   form(method='', action='', accept-charset='UTF-8')
                     input#email.form-control(type='text', placeholder='Email', name='email')
                     input#password.form-control(type='password', placeholder='Password', name='password')
-                    input.btn.btn-default.btn-login(type='button', value='Login', onclick='loginAjax()')
+                    input#submit_btn.btn.btn-default.btn-login(type='button', value='Login', onclick='loginAjax()')
             .box
               .content.registerBox(style='display:none;')
                 .form
@@ -103,7 +103,7 @@ block content
             option(value='6') Programación de Dispositivos Móviles
           br
           label(for='txtHora') Hora Inicial:
-          input(type='text',id='txtHora', name='txtHora')
+          input(type='text',id='txtHora', name='txtHora', placeholder='09:00:00')
           br
           label(for='txtLaboratorio') Laboratorio:
           select(id='txtLaboratorio',name='combo')
@@ -116,9 +116,9 @@ block content
             option(value='7') Laboratorio 7
           br
           label(for='txtFin') Hora Final:
-          input(type='text',id='txtFin', name='txtFin')
+          input(type='text',id='txtFin', name='txtFin', placeholder='09:00:00')
         .modal-footer
           button#btnAgregar.btn.btn-success(type='button') Agregar
-          button.btn.btn-primary(type='button') Modificar
-          button.btn.btn-danger(type='button') Borrar
+          button#btnModificar.btn.btn-primary(type='button') Modificar
+          button#btnEliminar.btn.btn-danger(type='button') Borrar
           button.btn.btn-default(type='button', data-dismiss='modal') Cancelar 

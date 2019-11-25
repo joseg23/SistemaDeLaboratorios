@@ -5,19 +5,26 @@ module.exports= {
         return knex('reserva');
     },
 
-    getOne(laboratorio){
-        return knex('reserva').where('laboratorio',laboratorio);
+    getOne(id){
+        return knex('reserva').where({id:id});
     },
 
     create(reserva){
         return knex('reserva').insert(reserva,'*');
     },
 
-    update(laboratorio, reserva){
-        return knex('reserva').where('laboratorio', id).update(reserva,'*');
+    update(id,reserva){
+        return knex('reserva').where({id:id}).update({
+            materia: reserva.materia,
+            laboratorio: reserva.laboratorio,
+            title:reserva.title,
+            start:reserva.start,
+            fin:reserva.fin,
+        })
+        .returning('*');
     },
 
-    delete(laboratorio){
-        return knex('reserva').where('laboratorio',laboratorio).del();
+    delete(id){
+        return knex('reserva').where({id:id}).del();
     }
 }
