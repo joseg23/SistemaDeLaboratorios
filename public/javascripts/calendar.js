@@ -53,22 +53,6 @@ $(document).ready(function() {
       })
     }
 
-    function SendUser(GetUser){
-      $.ajax({
-        type: 'GET',
-        url: '/users',
-        data:GetUser,
-        success : function(msg){
-          if(msg){
-            $('#loginModal').modal('toggle');
-            alert('inicio de sesion')
-          }
-        },
-        error : function(){
-          alert('hay un error...')
-        }
-      })
-    }
 
     $('#calendar').fullCalendar({
       header: {

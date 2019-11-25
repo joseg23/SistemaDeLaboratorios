@@ -13,5 +13,24 @@ window.onload = function() {
         bars.classList.toggle('hide-sidebar');
         close.classList.toggle('hide-sidebar');
     });
+
+    //Funcion verificar usuario
+
+    function SendUser(GetUser){
+        $.ajax({
+          type: 'GET',
+          url: '/users',
+          data:GetUser,
+          success : function(msg){
+            if(msg){
+              $('#loginModal').modal('toggle');
+              alert('inicio de sesion')
+            }
+          },
+          error : function(){
+            alert('hay un error...')
+          }
+        })
+      }
 };
 
