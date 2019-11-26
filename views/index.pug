@@ -52,12 +52,12 @@ block content
       .sidebar-heading Ajustes de busqueda
       .list-group.list-group-flush
           #visualizacion.form-group.list-group-item
-            label(for='visualizacion') Visualizar por:
+            label(for='radio1') Visualizar por:
             br
             input(type='radio', name='radio1', value='month')
             |  Mes
             br
-            input(type='radio', name='radio1', value='agendaWeek' checked)
+            input#week(type='radio', name='radio1', value='agendaWeek')
             |  Semana
             br
             input(type='radio', name='radio1', value='agendaDay')
@@ -65,9 +65,20 @@ block content
           #algo.form-group.list-group-item.bg-grey
             label(for='date') Seleccionar fecha:
             input#datepicker
+          .form-group.list-group-item.bg-grey
+            label(for='select') Eligir laboratorio:
+            select.form-control(id='selectLaboratorio',name='select')
+              option(value='1') Laboratorio 1
+              option(value='2') Laboratorio 2
+              option(value='3') Laboratorio 3
+              option(value='4') Laboratorio 4
+              option(value='5') Laboratorio 5
+              option(value='6') Laboratorio 6
+              option(value='7') Laboratorio 7
+              option(value='all',selected='selected') Todos
           .form-group.list-group-item.bg-grey.search-container
             label(for='search') Filtrar busqueda:
-            input(type='text', placeholder='Search..', name='search')
+            input(type='text', placeholder='Search for title', name='search')
             button(type='submit')
               i.fa.fa-search
     #page-content-wrapper
@@ -87,37 +98,49 @@ block content
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') &times;
         .modal-body
-          label(for='txtId') Id:
-          input(type='text',id='txtId', name='txtId')
-          br
-          label(for='txtFecha') Fecha:
-          input(type='text',id='txtFecha', name='txtFecha')
-          br
-          label(for='txtMateria') Materia:
-          select(id='txtMateria',name='combo')
-            option(value='1', selected='') Programacion Web
-            option(value='2') Base de datos
-            option(value='3') Administracion de bases de datos
-            option(value='4') Programacion orientada a objetos
-            option(value='5') Fundamentos de programacion
-            option(value='6') Programación de Dispositivos Móviles
-          br
-          label(for='txtHora') Hora Inicial:
-          input(type='text',id='txtHora', name='txtHora', placeholder='09:00:00')
-          br
-          label(for='txtLaboratorio') Laboratorio:
-          select(id='txtLaboratorio',name='combo')
-            option(value='1', selected='') Laboratorio 1
-            option(value='2') Laboratorio 2
-            option(value='3') Laboratorio 3
-            option(value='4') Laboratorio 4
-            option(value='5') Laboratorio 5
-            option(value='6') Laboratorio 6
-            option(value='7') Laboratorio 7
-          br
-          label(for='txtFin') Hora Final:
-          input(type='text',id='txtFin', name='txtFin', placeholder='09:00:00')
-        .modal-footer
+          //oculto
+          input(type='hidden',id='txtId', name='txtId')
+          
+          input(type='hidden',id='txtFecha', name='txtFecha')
+
+          input(type='hidden',id='pickColor',name='pickColor')
+          
+          input(type='hidden',id='status',name='status')
+
+          .form-row
+            .form-group.col-md-8
+              label(for='txtMateria') Materia:
+              select.form-control(id='txtMateria',name='combo')
+                option(value='1', selected='') Programacion Web
+                option(value='2') Base de datos
+                option(value='3') Administracion de bases de datos
+                option(value='4') Programacion orientada a objetos
+                option(value='5') Fundamentos de programacion
+                option(value='6') Programación de Dispositivos Móviles
+
+            .form-group-col-md-3
+              label(for='txtHora') Hora Inicial:
+              .input-group.clockpicker(data-autoclose='true')
+                input.form-control(type='text',id='txtHora', name='txtHora', placeholder='09:00:00')
+
+          .form-group
+            br
+            label(for='txtLaboratorio') Laboratorio:
+            select.form-control(id='txtLaboratorio',name='combo')
+              option(value='1', selected='') Laboratorio 1
+              option(value='2') Laboratorio 2
+              option(value='3') Laboratorio 3
+              option(value='4') Laboratorio 4
+              option(value='5') Laboratorio 5
+              option(value='6') Laboratorio 6
+              option(value='7') Laboratorio 7
+
+          .form-group
+            label(for='txtFin') Hora Final:
+            .input-group.clockpicker(data-autoclose='true')
+              input.form-control(type='text',id='txtFin', name='txtFin', placeholder='09:00:00')
+
+        .modal-footer.justify-content-start
           button#btnAgregar.btn.btn-success(type='button') Agregar
           button#btnModificar.btn.btn-primary(type='button') Modificar
           button#btnEliminar.btn.btn-danger(type='button') Borrar

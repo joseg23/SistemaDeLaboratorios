@@ -10,7 +10,15 @@ module.exports= {
     },
 
     create(reserva){
-        return knex('reserva').insert(reserva,'*');
+        return knex('reserva').insert({
+            laboratorio: reserva.laboratorio,
+            materia: reserva.materia,
+            title: reserva.title,
+            status: reserva.status,
+            start: reserva.start,
+            fin: reserva.fin,
+            color:reserva.color,
+        }).returning('*');
     },
 
     update(id,reserva){

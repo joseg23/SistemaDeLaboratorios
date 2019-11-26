@@ -1,4 +1,5 @@
 window.onload = function() {
+    $("#week").prop("checked", true);
     var element = document.querySelector('.mybtn');
     var tags = document.getElementsByTagName('i');
     var bars= tags[1];
@@ -10,6 +11,9 @@ window.onload = function() {
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4'
     });
+
+
+    $('.clockpicker').clockpicker();
 
     element.addEventListener('click', function(){
         document.getElementById('wrapper').classList.toggle('toggled');
@@ -38,9 +42,10 @@ window.onload = function() {
 
     element1.addEventListener('click',  function (){
         for(i=0;i<valor.length;i++)
-            if(valor[i].checked) var el= valor[i].value;
-            $('#calendar').fullCalendar('changeView', el);
-
+            if(valor[i].checked){
+              var el= valor[i].value;
+              $('#calendar').fullCalendar('changeView', el);
+            }
     });
 
     element2.addEventListener('click',function(){
