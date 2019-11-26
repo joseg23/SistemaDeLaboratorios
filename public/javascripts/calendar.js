@@ -77,10 +77,13 @@ $(document).ready(function() {
   }
 
   function ModificarInformacion(objEvento,modal){
-    idObjeto = objEvento.id
+    idObjeto = objEvento.id;
+    console.log(objEvento);
+    console.log(idObjeto);
     $.ajax({
       type: 'PUT',
       url: '/reserva/'+ idObjeto,
+      data: objEvento,
       success : function(msg){
         if(msg){
           if(!modal){
