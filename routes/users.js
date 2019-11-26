@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var usuario = require('../data/controllers/verificarController');
+var usuario = require('../data/controllers/usuarioController');
 
 
 function ValidUser(req,res,next){
-  if(!isNaN(req.params.nombre)) return next();
+  if(!isNaN(req.params.email)) return next();
     next(new Error('Invalid User'));
 };
 
@@ -14,8 +14,8 @@ router.get('/',(req,res)=>{
   })
 });
 
-router.get('/:nombre',ValidUser,(req,res,next)=>{
-  usuario.getOne(req.params.nombre).then(usuario=>{
+router.get('/:email',ValidUser,(req,res,next)=>{
+  usuario.getOne(req.params.email).then(usuario=>{
       if(usuario){
           res.json(usuario);
       }else{

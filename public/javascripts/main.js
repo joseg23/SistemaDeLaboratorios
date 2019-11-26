@@ -53,4 +53,6 @@ window.onload = function() {
         var date2 = $('#datepicker').datepicker().val();
         $('#calendar').fullCalendar('gotoDate', date2);
     });
+
+    $('#')
 };
