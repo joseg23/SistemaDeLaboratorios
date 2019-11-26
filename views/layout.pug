@@ -5,19 +5,23 @@ html
     meta(charset='utf-8')
     title= title
     
+    //Librerias y otros
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/fullcalendar.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-clockpicker.css')
+    link(href='https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css', rel='stylesheet', type='text/css')
+    
+
+    //estilo propio
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='/stylesheets/login-register.css', rel='stylesheet')
 
-    link(rel='stylesheet', href='/stylesheets/fullcalendar.min.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-clockpicker.css')
-
-    link(href='https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css', rel='stylesheet', type='text/css')
 
   body
     block content
 
+    //librerias y otros
     script(src='/js/jquery.js')
     link(rel='stylesheet', href='/js/jquery.min.js')
     script(src='/js/bootstrap.min.js')
@@ -29,13 +33,7 @@ html
     script(src='/javascripts/es.js')
     script(src='/javascripts/bootstrap-clockpicker.js')
 
+    //funciones, funcionalidades propias
+    script(src='/javascripts/main.js')
     script(src='/javascripts/calendar.js')
     script(src='/javascripts/login-register.js', type='text/javascript')
-    script(src='/javascripts/main.js')
-
-    //- script(src='/javascripts/login.js')
-    //- script(src='/javascripts/register.js')
-
-
-    
-    

@@ -78,8 +78,6 @@ $(document).ready(function() {
 
   function ModificarInformacion(objEvento,modal){
     idObjeto = objEvento.id;
-    console.log(objEvento);
-    console.log(idObjeto);
     $.ajax({
       type: 'PUT',
       url: '/reserva/'+ idObjeto,
@@ -210,6 +208,16 @@ $(document).ready(function() {
 
       RecolectarDatosGUI();
       ModificarInformacion(NuevoEvento,true);
-    }
+    },
+    events:'/reserva',
+    eventRender: function eventRender( event, element, view ) {
+      return ['all', event.laboratorio].indexOf($('#selectLabs').val()) >= 0
+      
+  }
   });
+
+  $('#selectLabs').on('change',function(){
+    $('#calendar').fullCalendar('rerenderEvents')
+  })
+
 });

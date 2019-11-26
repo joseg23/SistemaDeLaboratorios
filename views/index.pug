@@ -67,7 +67,8 @@ block content
             input#datepicker
           .form-group.list-group-item.bg-grey
             label(for='select') Eligir laboratorio:
-            select.form-control(id='selectLaboratorio',name='select')
+            select#selectLabs.form-control(name='select')
+              option#all(value='all') Todos
               option(value='1') Laboratorio 1
               option(value='2') Laboratorio 2
               option(value='3') Laboratorio 3
@@ -75,7 +76,6 @@ block content
               option(value='5') Laboratorio 5
               option(value='6') Laboratorio 6
               option(value='7') Laboratorio 7
-              option(value='all',selected='selected') Todos
           .form-group.list-group-item.bg-grey.search-container
             label(for='search') Filtrar busqueda:
             input(type='text', placeholder='Search for title', name='search')
