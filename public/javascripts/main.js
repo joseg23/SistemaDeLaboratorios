@@ -1,5 +1,6 @@
 window.onload = function() {
     $("#week").prop("checked", true);
+    $("#all").prop("selected", true);
     var element = document.querySelector('.mybtn');
     var tags = document.getElementsByTagName('i');
     var bars= tags[1];
@@ -9,9 +10,9 @@ window.onload = function() {
     var element2 = document.getElementById('algo');
 
     $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap4'
+        uiLibrary: 'bootstrap4',
+        dateFormat: 'YY/MM/DD',
     });
-
 
     $('.clockpicker').clockpicker();
 
@@ -49,7 +50,7 @@ window.onload = function() {
     });
 
     element2.addEventListener('click',function(){
-        var date2 = $("#datepicker").datepicker().val();
+        var date2 = $('#datepicker').datepicker().val();
         $('#calendar').fullCalendar('gotoDate', date2);
-      });  
+    });
 };
