@@ -55,7 +55,7 @@ app.use(session({
   resave: false,
   store: store,
   saveUninitialized: false,
-  //cookie: { secure: true }
+  //cookie: { httpOnly: false }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

@@ -14,7 +14,7 @@ block content
           p#bienvenidoTXT.text-white
             | Welcome back,
             strong= user.name
-          a.nav-link.text-decoration-none.text-grey(data-toggle='modal', href='/users/logout', required) Cerrar Sesion
+          a#logout.nav-link.text-decoration-none.text-grey(data-toggle='modal', href='javascript:void(0)', onclick='logOut();') Cerrar Sesion
 
       else
         ul#erased.navbar-nav.mr-auto

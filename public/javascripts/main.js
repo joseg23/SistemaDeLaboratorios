@@ -49,8 +49,8 @@ function loginAjax(){
         data: objEvent,
         success: function(){
             $('#loginModal').modal('toggle');
-            //$('#calendar').fullCalendar('refetchEvents');
-            //$('#calendar2').fullCalendar('refetchEvents');
+            location.reload();
+            
         },
         error: function(){
             shakeModal();
@@ -67,136 +67,18 @@ function shakeModal(){
     }, 1000 ); 
 };
 
-function cerrarSesion(){
-    
-};
-
-//calendar config
-function RecolectarDatosGUI(){
-    NuevoEvento = {
-        id:$('#txtId').val(),
-        title:$('#txtMateria option:selected').text() +"-"+ $('#txtLaboratorio option:selected').text(),
-        materia:$('#txtMateria').val(),
-        start:$('#txtFecha').val() + " " + $('#txtHora').val(),
-        laboratorio: $('#txtLaboratorio').val(),
-        status: false,
-        fin:$('#txtFin').val(),
-        color:'purple'
-    };
-};
-
-function EnviarInformacion(objEvento){
+function logOut(){
     $.ajax({
-      type: 'POST',
-      url: '/reserva/',
-      data: objEvento,
-      success : function(msg){
-        if(msg){
-          $('#ModalEventos').modal('toggle');
-          $('#calendar').fullCalendar('refetchEvents');
-        }
-      },
-      error:function(jqXHR, textStatus, errorThrown){
-          if (jqXHR.status === 0) {
-        
-            console.log('Not connect: Verify Network.');
-            alert('Not connect: Verify Network.');
-        
-          } else if (jqXHR.status == 404) {
-        
-            alert('Requested page not found [404]');
-        
-          } else if (jqXHR.status == 500) {
-        
-            alert('Internal Server Error [500].');
-        
-          } else if (textStatus === 'parsererror') {
-        
-            alert('Requested JSON parse failed.');
-        
-          } else if (textStatus === 'timeout') {
-        
-            alert('Time out error.');
-        
-          } else if (textStatus === 'abort') {
-        
-            alert('Ajax request aborted.');
-        
-          } else {
-  
-            alert('Uncaught Error: ' + jqXHR.responseText);
-        
-          }
-        }
-      }
-    )
-};
-
-function EliminarInformacion(objEvento){
-    idObjeto = objEvento.id
-    $.ajax({
-      type: 'DELETE',
-      url: '/reserva/'+ idObjeto,
-      success : function(msg){
-        if(msg){
-          $('#ModalEventos').modal('toggle');
-          $('#calendar').fullCalendar('refetchEvents');
-          alert('Eliminado correctamente');
-        }
-      }
+        type: 'POST',
+        url: '/users/logout',
+        success: function(){
+            location.reload();
+        },
+        error: function(){
+            alert('Hubo un error al cerrar sesion');
+        },
     })
-};
-
-function ModificarInformacion(objEvento,modal){
-    idObjeto = objEvento.id;
-    $.ajax({
-      type: 'PUT',
-      url: '/reserva/'+ idObjeto,
-      data: objEvento,
-      success : function(msg){
-        if(msg){
-          if(!modal){
-            $('#ModalEventos').modal('toggle');
-          }
-          $('#calendar').fullCalendar('refetchEvents');
-        }
-      },
-      error:function(jqXHR, textStatus, errorThrown){
-          if (jqXHR.status === 0) {
-        
-            console.log('Not connect: Verify Network.');
-            alert('Not connect: Verify Network.');
-        
-          } else if (jqXHR.status == 404) {
-        
-            alert('Requested page not found [404]');
-        
-          } else if (jqXHR.status == 500) {
-        
-            alert('Internal Server Error [500].');
-        
-          } else if (textStatus === 'parsererror') {
-        
-            alert('Requested JSON parse failed.');
-        
-          } else if (textStatus === 'timeout') {
-        
-            alert('Time out error.');
-        
-          } else if (textStatus === 'abort') {
-        
-            alert('Ajax request aborted.');
-        
-          } else {
-  
-            alert('Uncaught Error: ' + jqXHR.responseText);
-        
-          }
-        }
-      }
-    )
-};
-
+}
 window.onload = function() {
     $("#week").prop("checked", true);
     $("#all").prop("selected", true);
@@ -238,7 +120,132 @@ window.onload = function() {
 
     //calendar config
     var NuevoEvento;
+
+    function RecolectarDatosGUI(){
+        NuevoEvento = {
+            id:$('#txtId').val(),
+            title:$('#txtMateria option:selected').text() +"-"+ $('#txtLaboratorio option:selected').text(),
+            materia:$('#txtMateria').val(),
+            start:$('#txtFecha').val() + " " + $('#txtHora').val(),
+            laboratorio: $('#txtLaboratorio').val(),
+            status: false,
+            fin:$('#txtFin').val(),
+            color:'purple'
+        };
+    };
+
+    function EnviarInformacion(objEvento){
+        $.ajax({
+        type: 'POST',
+        url: '/reserva/',
+        data: objEvento,
+        success : function(msg){
+            if(msg){
+            $('#ModalEventos').modal('toggle');
+            $('#calendar').fullCalendar('refetchEvents');
+            }
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            if (jqXHR.status === 0) {
+            
+                console.log('Not connect: Verify Network.');
+                alert('Not connect: Verify Network.');
+            
+            } else if (jqXHR.status == 404) {
+            
+                alert('Requested page not found [404]');
+            
+            } else if (jqXHR.status == 500) {
+            
+                alert('Internal Server Error [500].');
+            
+            } else if (textStatus === 'parsererror') {
+            
+                alert('Requested JSON parse failed.');
+            
+            } else if (textStatus === 'timeout') {
+            
+                alert('Time out error.');
+            
+            } else if (textStatus === 'abort') {
+            
+                alert('Ajax request aborted.');
+            
+            } else {
     
+                alert('Uncaught Error: ' + jqXHR.responseText);
+            
+            }
+            }
+        }
+        )
+    };
+
+    function EliminarInformacion(objEvento){
+        idObjeto = objEvento.id
+        $.ajax({
+        type: 'DELETE',
+        url: '/reserva/'+ idObjeto,
+        success : function(msg){
+            if(msg){
+            $('#ModalEventos').modal('toggle');
+            $('#calendar').fullCalendar('refetchEvents');
+            alert('Eliminado correctamente');
+            }
+        }
+        })
+    };
+
+    function ModificarInformacion(objEvento,modal){
+        idObjeto = objEvento.id;
+        $.ajax({
+        type: 'PUT',
+        url: '/reserva/'+ idObjeto,
+        data: objEvento,
+        success : function(msg){
+            if(msg){
+            if(!modal){
+                $('#ModalEventos').modal('toggle');
+            }
+            $('#calendar').fullCalendar('refetchEvents');
+            }
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            if (jqXHR.status === 0) {
+            
+                console.log('Not connect: Verify Network.');
+                alert('Not connect: Verify Network.');
+            
+            } else if (jqXHR.status == 404) {
+            
+                alert('Requested page not found [404]');
+            
+            } else if (jqXHR.status == 500) {
+            
+                alert('Internal Server Error [500].');
+            
+            } else if (textStatus === 'parsererror') {
+            
+                alert('Requested JSON parse failed.');
+            
+            } else if (textStatus === 'timeout') {
+            
+                alert('Time out error.');
+            
+            } else if (textStatus === 'abort') {
+            
+                alert('Ajax request aborted.');
+            
+            } else {
+    
+                alert('Uncaught Error: ' + jqXHR.responseText);
+            
+            }
+            }
+        }
+        )
+    };
+
     $('#btnAgregar').click(function(){
         RecolectarDatosGUI();
         EnviarInformacion(NuevoEvento);
@@ -396,4 +403,5 @@ window.onload = function() {
             },
         })
     });
+
 };

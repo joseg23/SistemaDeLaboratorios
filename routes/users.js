@@ -3,6 +3,7 @@ var router = express.Router();
 var usuario = require('../data/controllers/usuarioController');
 var expressValidator = require('express-validator');
 var passport = require('passport');
+var session = require('../data/controllers/sessionController');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -72,7 +73,11 @@ router.post('/register',(req, res)=>{
 router.post('/logout', function(req, res){
   req.logout();
   req.session.destroy();
-  res.redirect('/');
+  session.DeleteOne(req.sessionID).then(()=>{
+    res.json({
+      Deleted: true,
+    })
+  });
 })
 
 passport.serializeUser(function(userCode, done) {

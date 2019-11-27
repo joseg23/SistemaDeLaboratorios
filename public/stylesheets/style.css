@@ -6,10 +6,10 @@ body {
 .logo img{
   display: none;
 }
-#Bienvenido a{
+#navbarCollapse a{
   color: rgba(255, 255, 255, 0.5);
 }
-#Bienvenido a:hover{
+#navbarCollapse a:hover{
   color: rgb(202, 202, 202);
 }
 h4{
