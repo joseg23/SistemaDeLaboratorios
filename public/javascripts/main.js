@@ -22,37 +22,19 @@ window.onload = function() {
         close.classList.toggle('hide-sidebar');
     });
 
-    //Funcion verificar usuario
-
-    function SendUser(GetUser){
-        $.ajax({
-          type: 'GET',
-          url: '/users',
-          data:GetUser,
-          success : function(msg){
-            if(msg){
-              $('#loginModal').modal('toggle');
-              alert('inicio de sesion')
-            }
-          },
-          error : function(){
-            alert('hay un error...')
-          }
-        })
-    };
-
     element1.addEventListener('click',  function (){
         for(i=0;i<valor.length;i++)
             if(valor[i].checked){
               var el= valor[i].value;
               $('#calendar').fullCalendar('changeView', el);
+              $('#calendar2').fullCalendar('changeView', el);
             }
     });
 
     element2.addEventListener('click',function(){
         var date2 = $('#datepicker').datepicker().val();
         $('#calendar').fullCalendar('gotoDate', date2);
+        $('#calendar2').fullCalendar('changeView', el);
     });
 
-    $('#')
 };

@@ -3,8 +3,28 @@ body {
   padding: 0;
 }
 
+.logo img{
+  display: none;
+}
+
+#Bienvenido a{
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#Bienvenido a:hover{
+  color: rgb(202, 202, 202);
+}
+
 h4{
   font-size: 18px;
+}
+
+.hide-sign{
+  display: none !important;
+}
+
+#bienvenidoTXT{
+  margin: auto;
 }
 
 .modal-header .close{
@@ -64,7 +84,7 @@ h4{
 
 .search-container button:hover {
   background: #ccc;
-  }
+}
 
 .hide-sidebar{
   display: none !important;
@@ -110,6 +130,10 @@ h4{
 }
 
 @media (min-width: 768px) {
+  .logo img{
+    display: inline;
+  }
+
   #sidebar-wrapper {
     margin-left: 0;
   }
@@ -123,11 +147,6 @@ h4{
     margin-left: -15rem;
   }
   
-  #calendar {
-    max-width: 900px;
-    margin: 13px auto;
-  }
-
   .modal-footer{
     justify-content: end !important;
   }

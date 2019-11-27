@@ -1,7 +1,7 @@
 extends layout
  
 block content
- 
+
   nav.navbar.justify-content-between.navbar-expand-md.navbar-dark.bg-dark
     .logo
       img.ml-2(src='/images/logo1.png',width="90px")
@@ -9,11 +9,14 @@ block content
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse.flex-grow-0
-      ul.navbar-nav.mr-auto
+      ul#erased.navbar-nav.mr-auto
         li.nav-item
-          a.nav-link(data-toggle='modal',href='javascript:void(0)', onclick='openLoginModal();') Iniciar Sesion
+          a.nav-link(data-toggle='modal',href='javascript:void(0)', onclick='openLoginModal();', required) Iniciar Sesion
         li.nav-item
-          a.nav-link(data-toggle='modal', href='javascript:void(0)', onclick='openRegisterModal();') Registrarse
+          a.nav-link(data-toggle='modal', href='javascript:void(0)', onclick='openRegisterModal();', required) Registrarse
+    #Bienvenido.hide-sign.d-inline-flex
+      p#bienvenidoTXT.text-white
+      a.nav-link.text-decoration-none.text-grey(data-toggle='modal', href='javascript:void(0)', onclick='cerrarSesion();', required) Cerrar Sesion
 
     #loginModal.modal.fade.login
       .modal-dialog.login.animated
@@ -24,20 +27,21 @@ block content
           .modal-body
             .box
               .content
-                .division
                 .form.loginBox
                   form(method='', action='', accept-charset='UTF-8')
-                    input#email.form-control(type='text', placeholder='Email', name='email')
-                    input#password.form-control(type='password', placeholder='Password', name='password')
+                    input#email1.form-control(type='email', placeholder='Email', name='email')
+                    input#password1.form-control(type='password', placeholder='Password', name='password')
                     input#submit_btn.btn.btn-default.btn-login(type='button', value='Login', onclick='loginAjax()')
             .box
               .content.registerBox(style='display:none;')
                 .form
                   form(method='', html='{:multipart=>true}', data-remote='true', action='', accept-charset='UTF-8')
-                    input#email.form-control(type='text', placeholder='Email', name='email')
-                    input#password.form-control(type='password', placeholder='Password', name='password')
+                    input#name1.form-control(type='text', placeholder='Ingrese su nombre', name='nombre')
+                    input#email2.form-control(type='email', placeholder='Email', name='email')
+                    input#username.form-control(type='text', placeholder='Nombre de usuario', name='username')
+                    input#password2.form-control(type='password', placeholder='Password', name='password')
                     input#password_confirmation.form-control(type='password', placeholder='Repeat Password', name='password_confirmation')
-                    input.btn.btn-default.btn-register(type='button', value='Create account', name='commit')
+                    input#submitRegister.btn.btn-default.btn-register(type='button', value='Create account', name='commit')
           .modal-footer
             .forgot.login-footer
               span
@@ -81,6 +85,7 @@ block content
             input(type='text', placeholder='Search for title', name='search')
             button(type='submit')
               i.fa.fa-search
+          .form-group.list-group-item.bg-grey.search-container
     #page-content-wrapper
       .container-fluid
         .navbar-nav.flex-row
@@ -88,7 +93,8 @@ block content
             span.dark-blue-text
               i.hide-sidebar.fas.fa-bars.fa-1x
               i.fas.fa-times
-        #calendar
+        #calendar.hide-sign
+        #calendar2
 
   #ModalEventos.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog(role='document')

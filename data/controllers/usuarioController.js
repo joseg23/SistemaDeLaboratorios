@@ -7,15 +7,16 @@ module.exports = {
     },
 
     getOne(email){
-        return knex('usuario').where('email',email);
+        return knex('usuario').where({correo:email});
     },
 
-    create(usuario){
+    create(usuario,password){
         return knex('usuario').insert({
             nombre: usuario.nombre,
-            usernamne: usuario.username,
-            contrasenia: usuario.contrasenia,
-            emial: usuario.email
+            username: usuario.username,
+            contrasenia: password,
+            correo: usuario.correo,
+            tipo: 'Estudiante'
         }).returning('*');
     }   
 };

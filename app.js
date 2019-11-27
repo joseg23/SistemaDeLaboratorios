@@ -4,13 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
+const Knex = require("knex");
+
+//Authentication Packages
+var session = require('express-session');
+var passport = require('passport');
+const KnexSessionStore = require("connect-session-knex")(session);
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var reservasRouter = require('./routes/reservas');
 
-
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,6 +25,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -29,6 +36,29 @@ app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/fullcalendar', express.static(__dirname + 'node_modules/fullcalendar/dist'));
 app.use('/moment', express.static(__dirname + 'node_modules/moment'));
+
+//Sessions
+
+const knex = Knex({
+  client: "pg",
+  connection: process.env.DB_URL
+});
+
+const store = new KnexSessionStore({
+  knex: knex,
+  tablename: "sessions" // optional. Defaults to 'sessions'
+});
+
+app.use(session({
+  name: process.env.SESS_NAME,
+  secret: 'jsbdjabdjsabdjkabdj',
+  resave: false,
+  store: store,
+  saveUninitialized: false,
+  //cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

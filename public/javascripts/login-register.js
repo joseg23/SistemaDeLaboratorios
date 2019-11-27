@@ -8,7 +8,8 @@ function showRegisterForm(){
     }); 
     $('.error').removeClass('alert alert-danger').html('');
        
-}
+};
+
 function showLoginForm(){
     $('#loginModal .registerBox').fadeOut('fast',function(){
         $('.loginBox').fadeIn('fast');
@@ -19,7 +20,7 @@ function showLoginForm(){
         $('.modal-title').html('Login');
     });       
      $('.error').removeClass('alert alert-danger').html(''); 
-}
+};
 
 function openLoginModal(){
     showLoginForm();
@@ -27,29 +28,40 @@ function openLoginModal(){
         $('#loginModal').modal('show');    
     }, 230);
     
-}
+};
+
 function openRegisterModal(){
     showRegisterForm();
     setTimeout(function(){
         $('#loginModal').modal('show');    
     }, 230);
     
-}
+};
 
 function loginAjax(){
-    /*   Remove this comments when moving to server
-    $.post( "/login", function( data ) {
-            if(data == 1){
-                window.location.replace("/home");            
-            } else {
-                 shakeModal(); 
-            }
-        });
-    */
-
-/*   Simulate error message from the server   */
-     shakeModal();
-}
+    objEvent = {
+        correo: $('#email1').val(),
+        contrasenia: $('#password1').val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/users/login',
+        data: objEvent,
+        success: function(){
+            $('#loginModal').modal('toggle');
+            $('#erased').toggleClass('hide-sign');
+            $('#Bienvenido').toggleClass('hide-sign');
+            $('#calendar').toggleClass('hide-sign');
+            $('#calendar2').toggleClass('hide-sign');
+            $('#calendar').fullCalendar('refetchEvents');
+            $('#calendar2').fullCalendar('refetchEvents');
+            $('##bienvenidoTXT').val('Bienvenido');
+        },
+        error: function(){
+            shakeModal();
+        },
+    })
+};
 
 function shakeModal(){
     $('#loginModal .modal-dialog').addClass('shake');
@@ -58,6 +70,37 @@ function shakeModal(){
              setTimeout( function(){ 
                 $('#loginModal .modal-dialog').removeClass('shake'); 
     }, 1000 ); 
-}
+};
 
+$('#submitRegister').click(function(){
+    objEvent = {
+        correo: $('#email2').val(),
+        contrasenia: $('#password2').val(),
+        username: $('#username').val(),
+        nombre: $('#name1').val(),
+        passwordMatch: $('#password_confirmation').val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/users/register',
+        data: objEvent,
+        success: function(){
+            $('#loginModal').modal('toggle');
+            $('#loginModal').modal('show'); 
+            alert('Registrado correctamente')
+        },
+        error: function(){
+            shakeModal();
+        },
+    })
+});
+
+function cerrarSesion(){
+    $('#erased').toggleClass('hide-sign');
+    $('#Bienvenido').toggleClass('hide-sign');
+    $('#calendar').toggleClass('hide-sign');
+    $('#calendar2').toggleClass('hide-sign');
+    $('#calendar').fullCalendar('refetchEvents');
+    $('#calendar2').fullCalendar('refetchEvents');
+};
    
