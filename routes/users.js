@@ -25,10 +25,11 @@ router.post('/login', (req, res)=>{
     usuario.getOne(req.body.correo).then(users =>{
       hash = users[0].contrasenia.toString();
       userCode = users[0].code;
+      userName = users[0].nombre;
       bcrypt.compare(password,hash, function(err, response){
         if(response=== true)
           req.login(userCode, function(err){
-            res.redirect('/');
+            res.render('index', { title: 'Sistema de reservas', userName:userName});;
         });
       });
     }); 
@@ -67,6 +68,12 @@ router.post('/register',(req, res)=>{
     });
   }
 });
+
+router.post('/logout', function(req, res){
+  req.logout();
+  req.session.destroy();
+  res.redirect('/');
+})
 
 passport.serializeUser(function(userCode, done) {
   done(null, userCode);

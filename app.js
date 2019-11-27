@@ -60,6 +60,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req,res,next){
+  res.locals.isAuthenticated = req.isAuthenticated();
+  //res.locals.UserName = req.
+  next();
+})
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/reserva',reservasRouter);

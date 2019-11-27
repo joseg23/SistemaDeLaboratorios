@@ -1,7 +1,7 @@
 extends layout
  
 block content
-
+  -let user={ name: userName , loggedIn : isAuthenticated }
   nav.navbar.justify-content-between.navbar-expand-md.navbar-dark.bg-dark
     .logo
       img.ml-2(src='/images/logo1.png',width="90px")
@@ -9,15 +9,20 @@ block content
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarCollapse.collapse.navbar-collapse.flex-grow-0
-      ul#erased.navbar-nav.mr-auto
-        li.nav-item
-          a.nav-link(data-toggle='modal',href='javascript:void(0)', onclick='openLoginModal();', required) Iniciar Sesion
-        li.nav-item
-          a.nav-link(data-toggle='modal', href='javascript:void(0)', onclick='openRegisterModal();', required) Registrarse
-    #Bienvenido.hide-sign.d-inline-flex
-      p#bienvenidoTXT.text-white
-      a.nav-link.text-decoration-none.text-grey(data-toggle='modal', href='javascript:void(0)', onclick='cerrarSesion();', required) Cerrar Sesion
+      
+      if user.loggedIn
+          p#bienvenidoTXT.text-white
+            | Welcome back,
+            strong= user.name
+          a.nav-link.text-decoration-none.text-grey(data-toggle='modal', href='/users/logout', required) Cerrar Sesion
 
+      else
+        ul#erased.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(data-toggle='modal',href='javascript:void(0)', onclick='openLoginModal();', required) Iniciar Sesion
+          li.nav-item
+            a.nav-link(data-toggle='modal', href='javascript:void(0)', onclick='openRegisterModal();', required) Registrarse
+      
     #loginModal.modal.fade.login
       .modal-dialog.login.animated
         .modal-content
@@ -93,8 +98,10 @@ block content
             span.dark-blue-text
               i.hide-sidebar.fas.fa-bars.fa-1x
               i.fas.fa-times
-        #calendar.hide-sign
-        #calendar2
+        if user.loggedIn
+          #calendar
+        else  
+          #calendar2
 
   #ModalEventos.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog(role='document')
