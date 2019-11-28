@@ -29,6 +29,8 @@ module.exports= {
             title:reserva.title,
             start:reserva.start,
             fin:reserva.fin,
+            status: reserva.status,
+            color: reserva.color,
         })
         .returning('*');
     },

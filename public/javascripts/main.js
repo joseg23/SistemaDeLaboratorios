@@ -127,16 +127,12 @@ window.onload = function() {
         if($('#status').val() == 'true'){
             color='green'
             status=true;
-        }else{
-            if($('#status').val() == 'false'){
-                $('#colorPicker').val('purple');
-                color='purple'
-                status=false;
-            }else{
-                color='purple';
-                status=false;
-            }
-        }
+        };
+        if($('#status').val() == 'false'){
+            $('#colorPicker').val('purple');
+            color='purple'
+            status=false;
+        };
         NuevoEvento = {
             id:$('#txtId').val(),
             title:$('#txtMateria option:selected').text() +"-"+ $('#txtLaboratorio option:selected').text(),
@@ -332,7 +328,6 @@ window.onload = function() {
                 $('#status').val('false');
             }
         }
-        $('#colorPicker').val(calEvent.color)
 
         FechaHora = calEvent.start._i.split("T");
 
@@ -360,8 +355,7 @@ window.onload = function() {
     events:'/reserva',
     eventRender: function eventRender( event, element, view ) {
         return ['all', event.laboratorio].indexOf($('#selectLabs').val()) >= 0
-        
-    }
+        }
     });
 
     $('#calendarCatedratico').fullCalendar({
