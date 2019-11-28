@@ -107,8 +107,10 @@ window.onload = function() {
         for(i=0;i<valor.length;i++)
             if(valor[i].checked){
               var el= valor[i].value;
-              $('#calendar').fullCalendar('changeView', el);
-              $('#calendar2').fullCalendar('changeView', el);
+              $('#calendarAdministrador').fullCalendar('changeView', el);
+              $('#calendarNoLogin').fullCalendar('changeView', el);
+              $('#calendarCatedratico').fullCalendar('changeView', el);
+              $('#calendarEstudiante').fullCalendar('changeView', el);
             }
     });
 
@@ -122,15 +124,21 @@ window.onload = function() {
     var NuevoEvento;
 
     function RecolectarDatosGUI(){
+        var color;
+        if($('#status').val()== false){
+            color='purple';
+        }else{
+            color='green';
+        }
         NuevoEvento = {
             id:$('#txtId').val(),
             title:$('#txtMateria option:selected').text() +"-"+ $('#txtLaboratorio option:selected').text(),
             materia:$('#txtMateria').val(),
             start:$('#txtFecha').val() + " " + $('#txtHora').val(),
             laboratorio: $('#txtLaboratorio').val(),
-            status: false,
+            status: $('#status').val(),
             fin:$('#txtFin').val(),
-            color:'purple'
+            color:color
         };
     };
 
@@ -142,7 +150,9 @@ window.onload = function() {
         success : function(msg){
             if(msg){
             $('#ModalEventos').modal('toggle');
-            $('#calendar').fullCalendar('refetchEvents');
+            $('#calendarAdministrador').fullCalendar('refetchEvents');
+            $('#calendarCatedratico').fullCalendar('refetchEvents');
+            
             }
         },
         error:function(jqXHR, textStatus, errorThrown){
@@ -189,7 +199,8 @@ window.onload = function() {
         success : function(msg){
             if(msg){
             $('#ModalEventos').modal('toggle');
-            $('#calendar').fullCalendar('refetchEvents');
+            $('#calendarAdministrador').fullCalendar('refetchEvents');
+            $('#calendarCatedratico').fullCalendar('refetchEvents');
             alert('Eliminado correctamente');
             }
         }
@@ -207,7 +218,8 @@ window.onload = function() {
             if(!modal){
                 $('#ModalEventos').modal('toggle');
             }
-            $('#calendar').fullCalendar('refetchEvents');
+            $('#calendarAdministrador').fullCalendar('refetchEvents');
+            $('#calendarCatedratico').fullCalendar('refetchEvents');
             }
         },
         error:function(jqXHR, textStatus, errorThrown){
@@ -252,16 +264,16 @@ window.onload = function() {
     });
 
     $('#btnEliminar').click(function(){
-    RecolectarDatosGUI();
-    EliminarInformacion(NuevoEvento);
+        RecolectarDatosGUI();
+        EliminarInformacion(NuevoEvento);
     });
 
     $('#btnModificar').click(function(){
-    RecolectarDatosGUI();
-    ModificarInformacion(NuevoEvento);
+        RecolectarDatosGUI();
+        ModificarInformacion(NuevoEvento);
     });
 
-    $('#calendar').fullCalendar({
+    $('#calendarAdministrador').fullCalendar({
     header: {
         left: 'prev,next today',
         center: 'title',
@@ -336,7 +348,82 @@ window.onload = function() {
     }
     });
 
-    $('#calendar2').fullCalendar({
+    $('#calendarCatedratico').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right:''
+        },
+    
+        selectable: true,
+        selectHelper: true,
+        navLinks: true,
+        allDaySlot:false,
+        
+        defaultView:'agendaWeek',
+        minTime: '07:00:00',
+        maxTime: '21:00:00',
+        events:'/reserva',
+        editable: true,
+        eventTextColor:'white',
+        
+        dayClick: function(date, jsEvent, view) {
+            $('#btnAgregar').prop('disabled',false);
+            $('#btnModificar').prop('disabled',true);
+            $('#btnEliminar').prop('disabled',true);
+    
+            FechaHora= date.format().split('T')
+            $('#txtFecha').val(FechaHora[0]);
+            $('#txtHora').val(FechaHora[1]);
+            $('#txtLaboratorio').val(1);
+            $('#txtMateria').val(1);
+            $('#txtFin').val('');
+            $('#ModalEventos').modal();
+        },
+        
+        eventClick: function(calEvent, jsEvent, view, resourceObj) {
+            $('#btnAgregar').prop('disabled',true);
+            $('#btnModificar').prop('disabled',false);
+            $('#btnEliminar').prop('disabled',true);
+    
+            $('#tituloEvento').html(calEvent.title);
+    
+            $('#txtId').val(calEvent.id);
+            $('#txtMateria').val(calEvent.materia);
+            $('#txtLaboratorio').val(calEvent.laboratorio);
+            $('#pickColor').val(calEvent.color);
+    
+            FechaHora = calEvent.start._i.split("T");
+    
+            $('#txtFecha').val(FechaHora[0]);
+            $('#txtHora').val(FechaHora[1]);
+    
+            $('#txtFin').val(calEvent.fin);
+            $('#ModalEventos').modal();
+        },
+    
+        eventDrop: function(calEvent){
+            $('#txtId').val(calEvent.id);
+            $('#txtMateria').val(calEvent.materia);
+            $('#txtLaboratorio').val(calEvent.laboratorio);
+    
+            FechaHora = calEvent.start.format().split("T");
+            $('#txtFecha').val(FechaHora[0]);
+            $('#txtHora').val(FechaHora[1]);
+    
+            $('#txtFin').val(calEvent.fin);
+    
+            RecolectarDatosGUI();
+            ModificarInformacion(NuevoEvento,true);
+        },
+        events:'/reserva',
+        eventRender: function eventRender( event, element, view ) {
+            return ['all', event.laboratorio].indexOf($('#selectLabs').val()) >= 0
+            
+        }
+    });
+
+    $('#calendarNoLogin').fullCalendar({
     header: {
         left: 'prev,next today',
         center: 'title',
@@ -377,7 +464,7 @@ window.onload = function() {
     });
 
     $('#selectLabs').on('change',function(){
-    $('#calendar').fullCalendar('rerenderEvents')
+    $('#calendarAdministrador').fullCalendar('rerenderEvents')
     });
 
     //other
@@ -403,5 +490,4 @@ window.onload = function() {
             },
         })
     });
-
 };

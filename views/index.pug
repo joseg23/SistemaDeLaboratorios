@@ -1,7 +1,7 @@
 extends layout
  
 block content
-  -let user={ name: userName , loggedIn : isAuthenticated }
+  -let user={ name: userName , loggedIn : isAuthenticated , type: userType}
   nav.navbar.justify-content-between.navbar-expand-md.navbar-dark.bg-dark
     .logo
       img.ml-2(src='/images/logo1.png',width="90px")
@@ -99,9 +99,15 @@ block content
               i.hide-sidebar.fas.fa-bars.fa-1x
               i.fas.fa-times
         if user.loggedIn
-          #calendar
+            if user.type == 'Administrador'
+              #calendarAdministrador
+            else
+              if user.type == 'Catedratico'
+                #calendarCatedratico
+              else
+                #calendarNoLogin
         else  
-          #calendar2
+          #calendarNoLogin
 
   #ModalEventos.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog(role='document')
@@ -118,8 +124,12 @@ block content
 
           input(type='hidden',id='pickColor',name='pickColor')
           
-          input(type='hidden',id='status',name='status')
-
+          if user.type =='Administrador'
+            select(id='status',name='status')
+              option(value=true) True
+              option(value=false, selected) False
+          else
+            input(type='hidden',id='status',name='status', value=false)
           .form-row
             .form-group.col-md-8
               label(for='txtMateria') Materia:

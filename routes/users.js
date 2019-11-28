@@ -27,10 +27,11 @@ router.post('/login', (req, res)=>{
       hash = users[0].contrasenia.toString();
       userCode = users[0].code;
       userName = users[0].nombre;
+      userType = users[0].tipo
       bcrypt.compare(password,hash, function(err, response){
         if(response=== true)
           req.login(userCode, function(err){
-            res.render('index', { title: 'Sistema de reservas', userName:userName});;
+            res.render('index', { title: 'Sistema de reservas', userName:userName, userType:userType });;
         });
       });
     }); 
@@ -53,7 +54,6 @@ router.post('/register',(req, res)=>{
   req.checkBody('passwordMatch', 'Las contraseñas no coiciden.').equals(req.body.contrasenia);
 
   const errors = req.validationErrors();
-  console.log(errors)
   const password = req.body.contrasenia;
   
   if(!errors){
@@ -72,11 +72,12 @@ router.post('/register',(req, res)=>{
 
 router.post('/logout', function(req, res){
   req.logout();
+  //res.clearCookie(req.sessionID,{ path: '/' }).status(200).send('Cookie deleted.');
   req.session.destroy();
   session.DeleteOne(req.sessionID).then(()=>{
     res.json({
       Deleted: true,
-    })
+    });
   });
 })
 
