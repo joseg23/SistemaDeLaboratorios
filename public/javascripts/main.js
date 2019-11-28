@@ -138,7 +138,8 @@ window.onload = function() {
             laboratorio: $('#txtLaboratorio').val(),
             status: $('#status').val(),
             fin:$('#txtFin').val(),
-            color:color
+            color:color,
+            code_usuario:$('#pickCode').val(),
         };
     };
 
@@ -424,47 +425,54 @@ window.onload = function() {
     });
 
     $('#calendarNoLogin').fullCalendar({
-    header: {
-        left: 'prev,next today',
-        center: 'title',
-        right:''
-    },
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right:''
+        },
 
-    selectable: true,
-    selectHelper: true,
-    navLinks: true,
-    allDaySlot:false,
-    
-    defaultView:'agendaWeek',
-    minTime: '07:00:00',
-    maxTime: '21:00:00',
-    events:'/reserva',
-    eventTextColor:'white',
+        selectable: true,
+        selectHelper: true,
+        navLinks: true,
+        allDaySlot:false,
+        
+        defaultView:'agendaWeek',
+        minTime: '07:00:00',
+        maxTime: '21:00:00',
+        events:'/reserva',
+        eventTextColor:'white',
 
-    eventClick: function(calEvent, jsEvent, view, resourceObj) {
-        $('#btnAgregar').prop('disabled',true);
-        $('#btnModificar').prop('disabled',true);
-        $('#btnEliminar').prop('disabled',true);
+        eventClick: function(calEvent, jsEvent, view, resourceObj) {
+            $('#btnAgregar').prop('disabled',true);
+            $('#btnModificar').prop('disabled',true);
+            $('#btnEliminar').prop('disabled',true);
 
-        $('#tituloEvento').html(calEvent.title);
+            $('#tituloEvento').html(calEvent.title);
 
-        $('#txtId').val(calEvent.id);
-        $('#txtMateria').val(calEvent.materia);
-        $('#txtLaboratorio').val(calEvent.laboratorio);
-        $('#pickColor').val(calEvent.color);
+            $('#txtId').val(calEvent.id);
+            $('#txtMateria').val(calEvent.materia);
+            $('#txtLaboratorio').val(calEvent.laboratorio);
+            $('#pickColor').val(calEvent.color);
 
-        FechaHora = calEvent.start._i.split("T");
+            FechaHora = calEvent.start._i.split("T");
 
-        $('#txtFecha').val(FechaHora[0]);
-        $('#txtHora').val(FechaHora[1]);
+            $('#txtFecha').val(FechaHora[0]);
+            $('#txtHora').val(FechaHora[1]);
 
-        $('#txtFin').val(calEvent.fin);
-        $('#ModalEventos').modal();
-    },
+            $('#txtFin').val(calEvent.fin);
+            $('#ModalEventos').modal();
+        },
+        events:'/reserva',
+        eventRender: function eventRender( event, element, view ) {
+            return ['all', event.laboratorio].indexOf($('#selectLabs').val()) >= 0
+            
+        },
     });
 
     $('#selectLabs').on('change',function(){
-    $('#calendarAdministrador').fullCalendar('rerenderEvents')
+        $('#calendarAdministrador').fullCalendar('rerenderEvents');
+        $('#calendarNoLogin').fullCalendar('rerenderEvents');
+        $('#calendarCatedratico').fullCalendar('rerenderEvents');
     });
 
     //other

@@ -27,11 +27,12 @@ router.post('/login', (req, res)=>{
       hash = users[0].contrasenia.toString();
       userCode = users[0].code;
       userName = users[0].nombre;
-      userType = users[0].tipo
+      userType = users[0].tipo;
+      code = users[0].code;
       bcrypt.compare(password,hash, function(err, response){
         if(response=== true)
           req.login(userCode, function(err){
-            res.render('index', { title: 'Sistema de reservas', userName:userName, userType:userType });;
+            res.render('index', { title: 'Sistema de reservas', userName:userName, userType:userType, userCode: code });;
         });
       });
     }); 

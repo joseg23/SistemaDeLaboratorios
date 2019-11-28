@@ -1,7 +1,7 @@
 extends layout
  
 block content
-  -let user={ name: userName , loggedIn : isAuthenticated , type: userType}
+  -let user={ name: userName , loggedIn : isAuthenticated , type: userType, userCode:code}
   nav.navbar.justify-content-between.navbar-expand-md.navbar-dark.bg-dark
     .logo
       img.ml-2(src='/images/logo1.png',width="90px")
@@ -12,7 +12,7 @@ block content
       
       if user.loggedIn
           p#bienvenidoTXT.text-white
-            | Welcome back,
+            | Welcome back, 
             strong= user.name
           a#logout.nav-link.text-decoration-none.text-grey(data-toggle='modal', href='javascript:void(0)', onclick='logOut();') Cerrar Sesion
 
@@ -78,13 +78,13 @@ block content
             label(for='select') Eligir laboratorio:
             select#selectLabs.form-control(name='select')
               option#all(value='all') Todos
-              option(value='1') Laboratorio 1
-              option(value='2') Laboratorio 2
-              option(value='3') Laboratorio 3
-              option(value='4') Laboratorio 4
-              option(value='5') Laboratorio 5
-              option(value='6') Laboratorio 6
-              option(value='7') Laboratorio 7
+              option(value="1") Laboratorio 1
+              option(value="2") Laboratorio 2
+              option(value="3") Laboratorio 3
+              option(value="4") Laboratorio 4
+              option(value="5") Laboratorio 5
+              option(value="6") Laboratorio 6
+              option(value="7") Laboratorio 7
           .form-group.list-group-item.bg-grey.search-container
             label(for='search') Filtrar busqueda:
             input(type='text', placeholder='Search for title', name='search')
@@ -123,6 +123,8 @@ block content
           input(type='hidden',id='txtFecha', name='txtFecha')
 
           input(type='hidden',id='pickColor',name='pickColor')
+
+          input(type='hidden',id='pickCode',name='code', value= user.userCode)
           
           if user.type =='Administrador'
             select(id='status',name='status')
