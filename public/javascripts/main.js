@@ -110,14 +110,14 @@ window.onload = function() {
               $('#calendarAdministrador').fullCalendar('changeView', el);
               $('#calendarNoLogin').fullCalendar('changeView', el);
               $('#calendarCatedratico').fullCalendar('changeView', el);
-              $('#calendarEstudiante').fullCalendar('changeView', el);
             }
     });
 
     element2.addEventListener('click',function(){
         var date2 = $('#datepicker').datepicker().val();
-        $('#calendar').fullCalendar('gotoDate', date2);
-        $('#calendar2').fullCalendar('changeView', el);
+        $('#calendarAdministrador').fullCalendar('gotoDate', date2);
+        $('#calendarNoLogin').fullCalendar('gotoDate', date2);
+        $('#calendarCatedratico').fullCalendar('gotoDate', date2);
     });
 
     //calendar config
