@@ -124,11 +124,18 @@ window.onload = function() {
     var NuevoEvento;
 
     function RecolectarDatosGUI(){
-        var color;
-        if($('#status').val()== false){
-            color='purple';
+        if($('#status').val() == 'true'){
+            color='green'
+            status=true;
         }else{
-            color='green';
+            if($('#status').val() == 'false'){
+                $('#colorPicker').val('purple');
+                color='purple'
+                status=false;
+            }else{
+                color='purple';
+                status=false;
+            }
         }
         NuevoEvento = {
             id:$('#txtId').val(),
@@ -136,7 +143,7 @@ window.onload = function() {
             materia:$('#txtMateria').val(),
             start:$('#txtFecha').val() + " " + $('#txtHora').val(),
             laboratorio: $('#txtLaboratorio').val(),
-            status: $('#status').val(),
+            status: status,
             fin:$('#txtFin').val(),
             color:color,
             code_usuario:$('#pickCode').val(),
@@ -317,7 +324,15 @@ window.onload = function() {
         $('#txtId').val(calEvent.id);
         $('#txtMateria').val(calEvent.materia);
         $('#txtLaboratorio').val(calEvent.laboratorio);
-        $('#pickColor').val(calEvent.color);
+
+        if(calEvent.status == true){
+            $('#status').val('true');
+        }else{
+            if(calEvent.status == false){
+                $('#status').val('false');
+            }
+        }
+        $('#colorPicker').val(calEvent.color)
 
         FechaHora = calEvent.start._i.split("T");
 

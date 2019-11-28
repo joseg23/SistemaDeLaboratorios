@@ -9,10 +9,10 @@ module.exports= {
         return knex('reserva').where({id:id});
     },
 
-    create(reserva, codeUsuario){
+    create(reserva){
         return knex('reserva').insert({
             laboratorio: reserva.laboratorio,
-            code_usuario: codeUsuario,
+            code_usuario: reserva.code_usuario,
             materia: reserva.materia,
             title: reserva.title,
             status: reserva.status,

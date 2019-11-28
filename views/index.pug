@@ -128,10 +128,10 @@ block content
           
           if user.type =='Administrador'
             select(id='status',name='status')
-              option(value=true) True
-              option(value=false, selected) False
+              option(value= 'true') true
+              option(value= 'false') false
           else
-            input(type='hidden',id='status',name='status', value=false)
+            input(type='hidden',id='status',name='status', value= 'false')
           .form-row
             .form-group.col-md-8
               label(for='txtMateria') Materia:

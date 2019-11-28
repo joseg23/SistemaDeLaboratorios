@@ -20,8 +20,7 @@ router.get('/:id',(req,res,next)=>{
 });
 
 router.post('/',(req,res)=>{
-    //codeUser = ,
-    reserva.create(req.body,codeUser).then(reservas =>{
+    reserva.create(req.body).then(reservas =>{
         res.json(reservas[0]);
     });
 });
